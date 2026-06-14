@@ -28,6 +28,8 @@
   --ornament: rgba(231, 236, 244, 0.68);
   --ornament-warm: rgba(201, 183, 130, 0.62);
   --shadow-deep: rgba(0, 0, 0, 0.32);
+  --window-drag-height: 42px;
+  --window-chrome-bg: rgba(11, 13, 16, 0.96);
 }
 
 :root[data-theme="light"] {
@@ -55,6 +57,7 @@
   --ornament: rgba(97, 77, 58, 0.56);
   --ornament-warm: rgba(179, 103, 74, 0.5);
   --shadow-deep: rgba(124, 100, 75, 0.16);
+  --window-chrome-bg: rgba(244, 239, 232, 0.96);
 }
 
 *,
@@ -114,6 +117,16 @@ body::after {
   mix-blend-mode: normal;
 }
 
+.window-drag-region {
+  position: fixed;
+  z-index: 30;
+  inset: 0 0 auto;
+  height: var(--window-drag-height);
+  background: var(--window-chrome-bg);
+  border-bottom: 1px solid var(--line-soft);
+  user-select: none;
+}
+
 :root[data-theme="light"] body::after {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.42), transparent 18%),
@@ -137,7 +150,7 @@ code {
   display: grid;
   grid-template-rows: minmax(0, 1fr);
   gap: 0;
-  padding: 14px;
+  padding: calc(var(--window-drag-height) + 14px) 14px 14px;
   position: relative;
   isolation: isolate;
 }
@@ -162,7 +175,7 @@ code {
 
 .app-shell-focus {
   grid-template-rows: minmax(0, 1fr);
-  padding: 10px;
+  padding: calc(var(--window-drag-height) + 10px) 10px 10px;
 }
 
 .topbar-card,

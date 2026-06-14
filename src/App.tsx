@@ -121,6 +121,7 @@ export default function App() {
         className={`app-shell ${readerFocusMode ? "app-shell-focus" : ""}`}
         data-theme={themeMode}
       >
+        <div className="window-drag-region" data-tauri-drag-region />
         <AppAtmosphere />
         <div className={workspaceGridClassName}>
           {showLibraryPanel ? (
