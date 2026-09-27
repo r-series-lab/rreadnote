@@ -593,7 +593,8 @@ pub fn search_workspace_content(
             for (line_index, line) in document.content.lines().enumerate() {
                 let line_number = line_index + 1;
 
-                while toc_index < document.toc.len() && document.toc[toc_index].line <= line_number {
+                while toc_index < document.toc.len() && document.toc[toc_index].line <= line_number
+                {
                     current_heading_slug = Some(document.toc[toc_index].slug.clone());
                     current_heading_title = Some(document.toc[toc_index].title.clone());
                     toc_index += 1;

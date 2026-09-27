@@ -7,9 +7,10 @@ use reader::{
     list_highlights as load_list_highlights, open_document_in_project,
     open_project as load_open_project, save_document_content,
     save_project_state as load_save_project_state, scan_workspace_root,
-    search_workspace_content as load_search_workspace_content, CapabilityReport, CreateHighlightInput,
-    CreateProjectInput, DocumentEnvelope, HighlightsEnvelope, ProjectDetail, ProjectStateEnvelope,
-    SaveDocumentInput, SaveProjectStateInput, SearchWorkspaceResult, WorkspaceScanResult,
+    search_workspace_content as load_search_workspace_content, CapabilityReport,
+    CreateHighlightInput, CreateProjectInput, DocumentEnvelope, HighlightsEnvelope, ProjectDetail,
+    ProjectStateEnvelope, SaveDocumentInput, SaveProjectStateInput, SearchWorkspaceResult,
+    WorkspaceScanResult,
 };
 
 #[tauri::command]
@@ -28,7 +29,11 @@ fn scan_workspace(root: String) -> Result<WorkspaceScanResult, String> {
 }
 
 #[tauri::command]
-fn search_workspace(root: String, query: String, limit: Option<usize>) -> Result<SearchWorkspaceResult, String> {
+fn search_workspace(
+    root: String,
+    query: String,
+    limit: Option<usize>,
+) -> Result<SearchWorkspaceResult, String> {
     load_search_workspace_content(root, query, limit).map_err(|error| error.message)
 }
 
