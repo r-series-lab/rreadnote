@@ -256,3 +256,14 @@ scripts/           CLI smoke 脚本
 MIT，见 [LICENSE](LICENSE)。
 
 公开仓库边界、贡献约定与安全报告方式见 [PUBLIC_REPOSITORY.md](PUBLIC_REPOSITORY.md)、[CONTRIBUTING.md](CONTRIBUTING.md) 和 [SECURITY.md](SECURITY.md)。
+
+## 界面预览与公开文档
+
+公开截图只展示安全的空工作区；仓库内置的 `命运的回声` 是合成演示书籍，不读取个人笔记或真实内容目录。
+
+![rReadNote 内容工作区](docs/assets/screenshots/rreadnote-library.png)
+
+- [界面与公开演示说明](docs/interface-guide.md)
+- [发布说明](RELEASE.md)
+- [安全边界](SECURITY.md)
+- [贡献指南](CONTRIBUTING.md)

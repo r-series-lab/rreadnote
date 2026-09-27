@@ -1,0 +1,24 @@
+name: Feature request
+description: Propose a focused rReadNote improvement
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or reading workflow
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Primary surface
+      options: [Library, Reader, Editor, Search, Highlights, CLI or AI, Other]
+    validations:
+      required: true

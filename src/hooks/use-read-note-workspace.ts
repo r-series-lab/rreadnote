@@ -339,6 +339,10 @@ export function useReadNoteWorkspace() {
     let cancelled = false;
 
     async function bootstrap() {
+      if (!("__TAURI_INTERNALS__" in window)) {
+        return;
+      }
+
       try {
         const [nextInfo, nextCapabilities] = await Promise.all([
           getAppInfo(),
