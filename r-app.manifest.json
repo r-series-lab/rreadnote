@@ -1,0 +1,49 @@
+{
+  "$schema": "https://r.rurie.top/schemas/r-app.manifest.schema.json",
+  "schemaVersion": 1,
+  "identity": { "slug": "rreadnote", "repo": "rreadnote", "name": "rReadNote", "binary": "rreadnote", "package": "rreadnote", "coreCrate": "rreadnote", "tauriCrate": "rreadnote", "identifier": "app.rseries.rreadnote" },
+  "product": {
+    "architecture": "modular-workbench",
+    "category": "Markdown 阅读与笔记工作台",
+    "tagline": "把本地 Markdown 内容变成可持续阅读和记录的工作区。",
+    "description": "扫描本地内容库，统一管理书籍和笔记项目，支持阅读、编辑、分栏、标题跳转、进度保存、高亮和搜索。",
+    "stage": "开发预览",
+    "localFirst": true,
+    "nonGoals": ["替代在线知识库或多人协作编辑器", "把本地正文上传到远程服务", "在没有用户选择的情况下修改原始 Markdown 文件"]
+  },
+  "website": {
+    "publish": true, "index": "06", "accent": "#7b61c8", "accentSoft": "#eee9ff", "platforms": ["macOS", "Windows", "Linux CLI"], "formats": ["Markdown", "Tauri", "JSON CLI"],
+    "facts": [{ "label": "内容", "value": "Markdown 书籍与笔记" }, { "label": "阅读方式", "value": "阅读 / 编辑 / 分栏" }, { "label": "数据边界", "value": "本地目录优先" }],
+    "capabilities": [
+      { "icon": "LibraryBig", "title": "内容库扫描", "body": "扫描用户明确选择的本地目录，发现 Markdown 文件并建立可检索的内容入口。" },
+      { "icon": "BookOpen", "title": "阅读工作区", "body": "在阅读视图中查看正文、标题结构和当前位置，保持适合长文阅读的连续上下文。" },
+      { "icon": "Columns3", "title": "阅读与编辑并行", "body": "按需切换阅读、编辑和分栏视图，在理解内容和修改 Markdown 之间保持顺畅切换。" },
+      { "icon": "Highlighter", "title": "进度与高亮", "body": "保存阅读进度、当前视图和高亮记录，让下一次打开时可以继续上次的工作。" },
+      { "icon": "Bot", "title": "Agent CLI", "body": "通过稳定 JSON CLI 扫描工作区、读写文档、管理项目、进度和高亮。" }
+    ],
+    "workflow": [
+      { "label": "扫描", "title": "选择本地内容库", "body": "从示例或用户明确选择的目录开始扫描，确认内容范围后再建立项目。" },
+      { "label": "整理", "title": "创建书籍或笔记项目", "body": "将多文档 Markdown 内容整理为 book 或 note 项目，保留原始目录边界。" },
+      { "label": "阅读", "title": "在结构中连续阅读", "body": "通过标题结构跳转，记录进度并在需要时切换到编辑或分栏视图。" },
+      { "label": "记录", "title": "保存高亮与下一步", "body": "把重要片段保存为高亮记录，并通过 CLI 或桌面端继续后续整理。" }
+    ],
+    "boundary": { "title": "内容留在本机，修改范围由用户选择", "body": "rReadNote 是本地优先的 Markdown 阅读与笔记工具，不是在线同步服务。它只读取或写入用户明确选择的目录，示例和截图使用虚构的内容标题与文本。" },
+    "releaseSummary": "首个公开预览版覆盖本地 Markdown 扫描、书籍与笔记项目、阅读/编辑/分栏视图、进度、高亮和稳定 JSON CLI。",
+    "screenshots": [{ "id": "library", "source": "docs/assets/screenshots/rreadnote-library.png", "alt": "使用示例书籍和笔记展示的 rReadNote 内容库", "title": "本地 Markdown 内容库", "description": "截图使用示例书籍、Demo Notes 和虚构内容，不包含个人文档或真实阅读记录。", "caption": "从内容库进入书籍和笔记项目，再继续阅读、编辑或记录高亮。", "highlights": ["书籍与笔记项目并列", "示例内容带有测试标识", "阅读进度和高亮入口可见"], "documentId": "interface-guide" }]
+  },
+  "documentation": [
+    { "id": "overview", "label": "产品与使用概览", "description": "定位、工作区、CLI、数据边界和开发说明。", "group": "开始使用", "source": "README.md" },
+    { "id": "interface-guide", "label": "界面使用手册", "description": "内容库、阅读、编辑、分栏、进度和高亮的使用说明。", "group": "开始使用", "source": "docs/interface-guide.md" },
+    { "id": "changelog", "label": "更新日志", "description": "按版本记录阅读和笔记工作流变化。", "group": "版本", "source": "CHANGELOG.md" }
+  ],
+  "cli": { "contractVersion": 1, "jsonFlagPosition": "command-local", "infoCommand": ["info", "--json"], "capabilitiesCommand": ["capabilities", "--json"], "doctorCommand": ["scan-workspace", "--json"], "domains": ["info", "capabilities", "workspace", "projects", "documents", "reading", "highlights"], "highRiskPolicy": "写入 Markdown、创建项目和保存高亮前必须由用户明确提供路径或项目目标，CLI 输出不应泄露正文以外的本机敏感路径。" },
+  "runtime": { "configKind": "json", "configPath": "系统应用数据目录中的 rreadnote 配置", "stateKind": "files", "storagePath": "本机应用数据目录中的项目索引、阅读状态和备份", "secretPolicy": "应用不保存账户凭据；公开示例、截图和测试内容使用虚构文本，不读取未选择的个人目录。" },
+  "quality": { "requiredScripts": ["dev", "build", "web:build", "rust-check"], "validationCommands": ["npm run web:build", "npm run rust-check", "npm run cli -- info --json"] },
+  "localization": {
+    "defaultLocale": "zh", "translations": { "en": {
+      "product": { "category": "Markdown reading and notes workbench", "tagline": "Turn local Markdown into a durable reading and note-taking workspace.", "description": "Scan a local library, organize book and note projects, read, edit, split panes, save progress, capture highlights, and search Markdown content.", "stage": "Development preview", "nonGoals": ["Replace an online knowledge base or collaborative editor", "Upload local document bodies to a remote service", "Modify Markdown files without an explicitly selected target"] },
+      "website": { "facts": [{ "label": "Content", "value": "Markdown books and notes" }, { "label": "Views", "value": "Read / edit / split" }, { "label": "Data boundary", "value": "Local directories first" }], "capabilities": [{ "icon": "LibraryBig", "title": "Library scanning", "body": "Scan an explicitly selected local directory and create searchable Markdown entry points." }, { "icon": "BookOpen", "title": "Reading workspace", "body": "Read documents with heading structure and position context designed for long-form continuity." }, { "icon": "Columns3", "title": "Read and edit together", "body": "Switch between reading, editing, and split views as you move from understanding to revision." }, { "icon": "Highlighter", "title": "Progress and highlights", "body": "Save reading position, view state, and highlights so the next session can resume." }, { "icon": "Bot", "title": "Agent CLI", "body": "Scan workspaces, read and write documents, and manage projects, progress, and highlights through stable JSON commands." }], "workflow": [{ "label": "Scan", "title": "Choose a local library", "body": "Start with an example or explicitly selected directory and confirm the content scope." }, { "label": "Organize", "title": "Create a book or note project", "body": "Group Markdown documents into a book or note project while preserving the source directory boundary." }, { "label": "Read", "title": "Read continuously through structure", "body": "Jump by headings, save progress, and switch to editing or split view when needed." }, { "label": "Record", "title": "Save highlights and next steps", "body": "Capture important passages and continue organizing them from the desktop app or CLI." }], "boundary": { "title": "Content stays local and edits stay explicit", "body": "rReadNote is a local-first Markdown reader and note tool, not an online sync service. It reads and writes only explicitly selected directories, and its examples use fictional titles and text." }, "releaseSummary": "The first public preview covers local Markdown scanning, book and note projects, read/edit/split views, progress, highlights, and a stable JSON CLI.", "screenshots": [{ "id": "library", "source": "docs/assets/screenshots/rreadnote-library.png", "alt": "rReadNote library using sample books and notes", "title": "Local Markdown library", "description": "The screenshot uses sample books, Demo Notes, and fictional content; it contains no personal documents or real reading history.", "caption": "Open book and note projects from the library, then continue reading, editing, or capturing highlights.", "highlights": ["Books and notes appear together", "Sample content is explicitly labeled", "Progress and highlight entry points are visible"], "documentId": "interface-guide" }] },
+      "documentation": [{ "id": "overview", "label": "Product and usage overview", "description": "Purpose, workspace, CLI, data boundary, and development notes.", "group": "Getting started", "source": "README_EN.md", "reviewedForVersion": "0.1.0" }, { "id": "interface-guide", "label": "Interface guide", "description": "Library, reading, editing, split view, progress, and highlights.", "group": "Getting started", "source": "docs/interface-guide_EN.md", "reviewedForVersion": "0.1.0" }, { "id": "changelog", "label": "Changelog", "description": "Reading and note workflow changes by version.", "group": "Releases", "source": "CHANGELOG_EN.md", "reviewedForVersion": "0.1.0" }]
+    } }
+  }
+}
